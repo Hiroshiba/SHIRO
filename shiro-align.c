@@ -214,12 +214,18 @@ int main(int argc, char** argv) {
     lrh_observ* o = load_observ_from_float(j_filename -> valuestring, hsmm);
     j_states = align(hsmm, o, j_states);
     cJSON_ReplaceItemInObject(j_file_list_f, "states", j_states);
+
+    // Export individually for large amounts of data
+    char* jsonstr = cJSON_Print(j_file_list_f);
+    printf("%s\n", jsonstr);
+    free(jsonstr);
+
     lrh_delete_observ(o);
   }
 
-  char* jsonstr = cJSON_Print(j_segm);
-  printf("%s\n", jsonstr);
-  free(jsonstr);
+  // char* jsonstr = cJSON_Print(j_segm);
+  // printf("%s\n", jsonstr);
+  // free(jsonstr);
 
   cJSON_Delete(j_segm);
   lrh_delete_model(hsmm);

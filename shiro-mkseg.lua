@@ -80,7 +80,7 @@ if shiro_cli.checkpm(pm) == false then return end
 
 -- generate segmentation
 
-local seg = {file_list = {}}
+-- local seg = {file_list = {}}
 for i = 1, #file_list do
   local feature_path = file_list[i].path .. ext
   fh = io.open(feature_path)
@@ -162,9 +162,12 @@ for i = 1, #file_list do
       end
     end
   end
-  seg.file_list[i] = {filename = feature_path, states = states}
+  -- seg.file_list[i] = {filename = feature_path, states = states}
+  print(json.encode({filename = feature_path, states = states}, {indent = true,
+    keyorder = {"filename", "states", "time", "dur", "out", "jmp", "ext"}}))
+
   io.close(fh)
 end
 
-print(json.encode(seg, {indent = true,
-  keyorder = {"filename", "states", "time", "dur", "out", "jmp", "ext"}}))
+-- print(json.encode(seg, {indent = true,
+--   keyorder = {"filename", "states", "time", "dur", "out", "jmp", "ext"}}))

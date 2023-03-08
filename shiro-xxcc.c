@@ -53,7 +53,7 @@ static FP_TYPE* read_float_data(const char* path, int* nx) {
   else
     fin = fopen(path, "rb");
   fseek(fin, 0, SEEK_END);
-  int fsize = ftell(fin);
+  long int fsize = ftell(fin);
   fseek(fin, 0, SEEK_SET);
   *nx = fsize / sizeof(float);
   

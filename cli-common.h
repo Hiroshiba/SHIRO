@@ -37,7 +37,7 @@ static char* readall(const char* path) {
   FILE* fp = fopen(path, "r");
   if(fp == NULL) return NULL;
   fseek(fp, 0, SEEK_END);
-  int fsize = ftell(fp);
+  long int fsize = ftell(fp);
   fseek(fp, 0, SEEK_SET);
   char* ret = malloc(fsize + 1);
   ret[fsize] = 0;
@@ -73,7 +73,7 @@ static lrh_observ* load_observ_from_float(const char* path, lrh_model* h) {
     stride += h -> streams[l] -> gmms[0] -> ndim;
   }
   fseek(fin, 0, SEEK_END);
-  int fsize = ftell(fin);
+  long int fsize = ftell(fin);
   fseek(fin, 0, SEEK_SET);
 
   if(fsize % stride * 4 != 0) {
